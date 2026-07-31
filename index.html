@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CSA Customer Consumption Hub</title>
+<style>
+  :root{
+    --bg:#faf9f8; --panel:#ffffff; --border:#edebe9; --border-strong:#c8c6c4;
+    --text:#201f1e; --muted:#605e5c; --soft:#8a8886;
+    --accent:#0078d4; --accent-hover:#106ebe; --accent-soft:#eff6fc;
+    --lock:#8a8886; --active:#107c10; --active-soft:#dff6dd; --soon:#8a8886;
+    --shadow:0 1.6px 3.6px rgba(0,0,0,.10),0 .3px .9px rgba(0,0,0,.07);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1b1a19; --panel:#252423; --border:#3b3a39; --border-strong:#484644;
+      --text:#f3f2f1; --muted:#c8c6c4; --soft:#979593; --accent:#2899f5; --accent-hover:#3aa0f3;
+      --accent-soft:#0b2942; --active:#54b054; --active-soft:#123412; --shadow:0 1.6px 3.6px rgba(0,0,0,.4); }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Segoe UI",Aptos,Calibri,-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.5;}
+  .wrap{max-width:940px;margin:0 auto;padding:34px 22px 80px;}
+  header.top{display:flex;align-items:center;gap:16px;margin-bottom:6px;}
+  .logo{width:40px;height:40px;flex:0 0 auto;}
+  h1{font-size:26px;margin:0;font-weight:600;letter-spacing:-.01em;}
+  .subtitle{color:var(--muted);font-size:14px;margin:2px 0 0;}
+  .authbar{display:flex;align-items:center;gap:9px;margin:20px 0 26px;padding:11px 16px;
+    background:var(--accent-soft);border:1px solid var(--border);border-radius:8px;font-size:13.5px;color:var(--muted);}
+  .authbar svg{flex:0 0 auto;}
+  .authbar b{color:var(--text);font-weight:600;}
+  .search{width:100%;padding:9px 14px;border:1px solid var(--border-strong);border-radius:8px;
+    font-family:inherit;font-size:14px;background:var(--panel);color:var(--text);margin-bottom:22px;}
+  .search:focus{outline:none;border-color:var(--accent);}
+  .group{margin-bottom:10px;}
+  .group-head{display:flex;align-items:center;gap:10px;padding:10px 6px;cursor:pointer;user-select:none;
+    font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);}
+  .chev{transition:transform .15s ease;display:inline-flex;}
+  .group.collapsed .chev{transform:rotate(-90deg);}
+  .group.collapsed .items{display:none;}
+  .items{display:flex;flex-direction:column;gap:10px;padding-left:2px;}
+  .card{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--panel);
+    border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);}
+  .ficon{width:34px;height:34px;flex:0 0 auto;border-radius:8px;display:flex;align-items:center;justify-content:center;
+    background:var(--accent-soft);}
+  .cbody{flex:1 1 auto;min-width:0;}
+  .cname{font-size:15px;font-weight:600;margin:0;}
+  .cmeta{font-size:12.5px;color:var(--muted);margin:1px 0 0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .status{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;}
+  .status.active{background:var(--active-soft);color:var(--active);}
+  .status.soon{background:var(--border);color:var(--soon);}
+  .lockrow{display:inline-flex;align-items:center;gap:4px;color:var(--soft);font-size:11.5px;}
+  .btn{flex:0 0 auto;appearance:none;border:none;font-family:inherit;font-size:13.5px;font-weight:600;
+    padding:8px 16px;border-radius:6px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px;}
+  .btn.primary{background:var(--accent);color:#fff;}
+  .btn.primary:hover{background:var(--accent-hover);}
+  .btn.disabled{background:var(--border);color:var(--soft);cursor:not-allowed;pointer-events:none;}
+  .foot{margin-top:34px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--soft);}
+  .foot b{color:var(--muted);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <svg class="logo" viewBox="0 0 40 40" aria-label="Microsoft">
+      <rect x="1" y="1" width="18" height="18" fill="#F25022"/>
+      <rect x="21" y="1" width="18" height="18" fill="#7FBA00"/>
+      <rect x="1" y="21" width="18" height="18" fill="#00A4EF"/>
+      <rect x="21" y="21" width="18" height="18" fill="#FFB900"/>
+    </svg>
+    <div>
+      <h1>CSA Customer Consumption Hub</h1>
+      <p class="subtitle">Copilot PRU &amp; Agent Consumption dashboards · David Liu, Customer Success Architect</p>
+    </div>
+  </header>
+
+  <div class="authbar">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    <span><b>Microsoft sign-in required.</b> Dashboards are stored in Microsoft OneDrive (OD4B). No customer data is stored on this page — each link opens an authenticated OD4B file.</span>
+  </div>
+
+  <input class="search" id="search" placeholder="Filter customers…" oninput="filterCards()" />
+
+  <div class="group" data-group>
+    <div class="group-head" onclick="toggleGroup(this)">
+      <span class="chev"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l8 7-8 7z"/></svg></span>
+      SLED · Higher Education
+    </div>
+    <div class="items">
+      <!-- ACTIVE: Montgomery College -->
+      <div class="card" data-name="montgomery college">
+        <div class="ficon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
+        </div>
+        <div class="cbody">
+          <p class="cname">Montgomery College</p>
+          <p class="cmeta">
+            <span class="status active">● Active</span>
+            <span class="lockrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>OD4B · MSFT auth</span>
+            <span>PRU · Agents · Sentiment</span>
+          </p>
+        </div>
+        <a class="btn primary" href="https://microsoft-my.sharepoint.com/personal/liudavid_microsoft_com/Documents/CSA-Customer-Dashboards/Montgomery-College/index.html" target="_blank" rel="noopener">
+          Open Dashboard
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+      </div>
+
+      <!-- PLACEHOLDER -->
+      <div class="card" data-name="placeholder university">
+        <div class="ficon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--soft)" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
+        </div>
+        <div class="cbody">
+          <p class="cname" style="color:var(--muted)">[Customer Name] University</p>
+          <p class="cmeta"><span class="status soon">Coming soon</span><span>Placeholder — add when engagement starts</span></p>
+        </div>
+        <span class="btn disabled">Open Dashboard</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="group" data-group>
+    <div class="group-head" onclick="toggleGroup(this)">
+      <span class="chev"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l8 7-8 7z"/></svg></span>
+      SLED · Public Safety
+    </div>
+    <div class="items">
+      <div class="card" data-name="placeholder agency police">
+        <div class="ficon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--soft)" stroke-width="2"><path d="M12 2l7 4v6c0 5-3 8-7 10-4-2-7-5-7-10V6z"/></svg></div>
+        <div class="cbody">
+          <p class="cname" style="color:var(--muted)">[Agency / Department]</p>
+          <p class="cmeta"><span class="status soon">Coming soon</span><span>Placeholder</span></p>
+        </div>
+        <span class="btn disabled">Open Dashboard</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="group" data-group>
+    <div class="group-head" onclick="toggleGroup(this)">
+      <span class="chev"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l8 7-8 7z"/></svg></span>
+      SLED · State &amp; Local Government
+    </div>
+    <div class="items">
+      <div class="card" data-name="placeholder state agency">
+        <div class="ficon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--soft)" stroke-width="2"><path d="M3 21h18M6 21V10M18 21V10M4 10h16L12 4z"/></svg></div>
+        <div class="cbody">
+          <p class="cname" style="color:var(--muted)">[State Agency]</p>
+          <p class="cmeta"><span class="status soon">Coming soon</span><span>Placeholder</span></p>
+        </div>
+        <span class="btn disabled">Open Dashboard</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <b>How this works:</b> This page is a public front-end (a &ldquo;skin&rdquo;) that contains only links — no customer data. Clicking <b>Open Dashboard</b> loads the interactive dashboard from Microsoft OneDrive, which requires Microsoft sign-in and explicit sharing. Data never resides on this page or in the public web host.
+  </div>
+</div>
+
+<script>
+function toggleGroup(el){ el.parentElement.classList.toggle('collapsed'); }
+function filterCards(){
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  document.querySelectorAll('.group').forEach(g=>{
+    let any=false;
+    g.querySelectorAll('.card').forEach(c=>{
+      const match = c.dataset.name.includes(q);
+      c.style.display = match ? '' : 'none';
+      if(match) any=true;
+    });
+    g.style.display = any ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>
