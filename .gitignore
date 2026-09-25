@@ -1,0 +1,19 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+*.swp
+*.swo
+*~
+
+# Secrets / environment
+.env
+*.env
+secrets.js
+config.local.js
+# Local working copies of the internal launcher - never publish
+snapshots/
+hub.html
