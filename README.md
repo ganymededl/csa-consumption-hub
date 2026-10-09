@@ -16,9 +16,24 @@ off to Microsoft authentication**. It deliberately contains:
 - no metrics of any kind
 
 All reporting content lives in Microsoft OneDrive for Business and is reachable
-only by signed-in, explicitly authorised Microsoft personnel. The account
+by signed-in Microsoft employees through organization-scoped, read-only sharing
+links. Public and guest access are not enabled. The account
 launcher itself (`hub.html`) is stored alongside the dashboards in OneDrive and
 is **not** published here.
+
+## Access
+
+The primary button opens the shared reporting folder using its **People in
+Microsoft / Can view** link. Visitors should open that folder first, then open
+`hub.html`, so supporting files, archives and backups are accessible as well.
+The secondary launcher link includes its own organization-only sharing token.
+Use an `@microsoft.com` work account.
+
+Preserve the `share` query parameter when updating either link. A copied owner
+navigation URL without that parameter does not grant access to a new visitor.
+Separately permissioned dashboard entry pages must retain their own
+organization-scoped view links. Linked Teams conversations, MSX records and
+MSXi reports remain subject to those services' permissions.
 
 ## Terminology
 
